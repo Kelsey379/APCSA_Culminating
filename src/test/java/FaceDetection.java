@@ -1,10 +1,5 @@
 //import necessary modules from the OpenCV library
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfRect;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
+import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
@@ -31,6 +26,7 @@ public class FaceDetection {
         //repeat this line of code for each face that is detected
         for (Rect rect : faceDetections.toArray()) {
             //draw a rectangle around any faces using X and Y-coordinates and the width/height
+            //Imgproc.ellipse(frame, center, new Size(face.width / 2, face.height / 2), 0, 0, 360, new Scalar(255, 0, 255));
             Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(255, 0, 0));
         }
     }

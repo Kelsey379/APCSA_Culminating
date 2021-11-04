@@ -1,3 +1,4 @@
+/*
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -5,14 +6,14 @@ class Attendance{
     private static int day;
     private static String month;
     private static int year;
-    private static int faces;
+    //private static int faces;
     ArrayList<String> datesList = new ArrayList<String>();
     ArrayList<Integer> faceList = new ArrayList<Integer>();
 
     public Attendance(String dateInput){
-        faces = 5; //set this to however many faces there are detected in the image/video input
+        numFaces = 5; //set this to however many faces there are detected in the image/video input
         datesList.add(dateInput);
-        faceList.add(faces);
+        faceList.add(numFaces);
         for (int i = 0; i < datesList.size(); i++) {
             System.out.println("On "+ datesList.get(i) + " there were " + faceList.get(i) + " people in class.");
         }
@@ -41,3 +42,4 @@ class Attendance{
         }
     }
 }
+*/
