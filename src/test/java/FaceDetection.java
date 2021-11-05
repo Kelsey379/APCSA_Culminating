@@ -1,8 +1,10 @@
 //import necessary modules from the OpenCV library
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
+//import org.opencv.videoio.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+//import org.opencv.highgui.HighGui;
 
 //create a faceDetection class
 public class FaceDetection {
