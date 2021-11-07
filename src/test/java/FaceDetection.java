@@ -1,3 +1,4 @@
+/*
 //import necessary modules from the OpenCV library
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -38,3 +39,4 @@ public class FaceDetection {
         Imgcodecs.imwrite("C:\\Users\\kelse\\cs culm test\\src\\main\\programOutput.png", image);
     }
 }
+*/

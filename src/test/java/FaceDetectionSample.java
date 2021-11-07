@@ -9,11 +9,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 class FaceDetectionSample {
-   private static Mat frameGray = new Mat();
-    private static MatOfRect faces = new MatOfRect();
-    private static Mat frame = new Mat();
+   private static Mat grayscaleImage = new Mat();
+    private static MatOfRect facesInFrame = new MatOfRect();
+    private static Mat imageView = new Mat();
     private static int numFaces = 0;
     private static CascadeClassifier faceCascade = new CascadeClassifier();
+
     Scanner inputType = new Scanner (System.in);
     private static int day;
     private static String month;
@@ -23,21 +24,21 @@ class FaceDetectionSample {
     private static ArrayList<Integer> faceList = new ArrayList<Integer>();
 
     public void detectAndDisplay() {
-        Imgproc.cvtColor(frame, frameGray, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.cvtColor(imageView, grayscaleImage, Imgproc.COLOR_BGR2GRAY);
        // Imgproc.equalizeHist(frameGray, frameGray);
         // -- Detect faces
-        faceCascade.detectMultiScale(frameGray, faces);
-        List<Rect> listOfFaces = faces.toList();
+        faceCascade.detectMultiScale(grayscaleImage, facesInFrame);
+        List<Rect> listOfFaces = facesInFrame.toList();
         numFaces = 0;
         for (Rect face : listOfFaces) {
             Point center = new Point(face.x + face.width / 2, face.y + face.height / 2);
-            Imgproc.ellipse(frame, center, new Size(face.width / 2, face.height / 2), 0, 0, 360,
+            Imgproc.ellipse(imageView, center, new Size(face.width / 2, face.height / 2), 0, 0, 360,
                     new Scalar(255, 0, 255));
-            Mat faceROI = frameGray.submat(face);
+            Mat faceROI = grayscaleImage.submat(face);
             numFaces++;
         }
         //diaplay results
-        HighGui.imshow("Capture - Face detection", frame );
+        HighGui.imshow("Capture - Face detection", imageView);
         //count faces and end program: FIX THIS CODE!!
 //        System.out.println("There are " + numFaces + " faces in the frame.");
 //        System.exit(0);
@@ -54,8 +55,8 @@ class FaceDetectionSample {
             System.err.println("--(!)Error opening video capture");
             System.exit(0);
         }
-        while (capture.read(frame)) {
-            if (frame.empty()) {
+        while (capture.read(imageView)) {
+            if (imageView.empty()) {
                 System.err.println("--(!) No captured frame -- Break!");
                 break;
             }
