@@ -33,7 +33,13 @@ class FaceDetectionSample {
         for (Rect face : listOfFaces) {
             Point center = new Point(face.x + face.width / 2, face.y + face.height / 2);
             Imgproc.ellipse(imageView, center, new Size(face.width / 2, face.height / 2), 0, 0, 360,
-                    new Scalar(255, 0, 255));
+                    new Scalar(255, 0, 255), 10);
+//            Imgproc.rectangle(imageView,
+////                    new Point(face.x, face.y),        //p1
+////                    new Point(face.x+face.width/2, face.y+face.height/2),       //p2
+//                    new Point(150, 30),
+//                    new Point (300, 150),
+//                    new Scalar(255, 0, 255), 10);
             Mat faceROI = grayscaleImage.submat(face);
             numFaces++;
         }
