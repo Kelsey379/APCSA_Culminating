@@ -5,7 +5,6 @@ import org.opencv.highgui.HighGui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
-
 //List, Scanner, and ArrayList are used in the attendanceManagement method to keep track of results
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.Scanner;
 
 //start by creating the FaceDetection class
 class FaceDetectionSample {
-    //Images or video input will need to be converted to a mat in order to be processed by the cascade classifier
+    //Images or video input will need to be converted to a matrix in order to be processed by the cascade classifier
     private static Mat grayscaleImage = new Mat();
     private static MatOfRect facesInFrame = new MatOfRect();
     private static Mat imageView = new Mat();
@@ -21,7 +20,6 @@ class FaceDetectionSample {
     private static CascadeClassifier faceCascade = new CascadeClassifier();
     private static boolean found = false;
     private static int foundIndex;
-
     //create new scanners and variables to manage the date for the attendanceManagement method
     Scanner inputType = new Scanner(System.in);
     private static int maxCapacity;
@@ -95,13 +93,29 @@ class FaceDetectionSample {
         }
 
         //iterate through the datesList list and print how many faces there were on each day
+        //if the limit is exceeded, let the user know
         System.out.println("Past attendance records:");
         for (int i = 0; i < datesList.size(); i++) {
-
             if (faceList.get(i) > 1) {
                 System.out.println("On " + datesList.get(i) + " there were " + faceList.get(i) + " people in class.");
+                if (faceList.get(i)>maxCapacity){
+                    System.out.print("WARNING: Capacity exceeded ");
+                    if(faceList.get(i)-maxCapacity == 1){
+                        System.out.println("There is " + (faceList.get(i)-maxCapacity) +" person beyond the limit.");
+                    }else{
+                        System.out.println("There are " + (faceList.get(i)-maxCapacity) +" people beyond the limit.");
+                    }
+                }
             } else if (faceList.get(i) == 1) {
                 System.out.println("On " + datesList.get(i) + " there was " + faceList.get(i) + " person in class.");
+                if (faceList.get(i)>maxCapacity){
+                    System.out.print("WARNING: Capacity exceeded! ");
+                    if(faceList.get(i)-maxCapacity == 1){
+                        System.out.println("There is " + (faceList.get(i)-maxCapacity) +" person beyond the limit.");
+                    }else{
+                        System.out.println("There are " + (faceList.get(i)-maxCapacity) +" people beyond the limit.");
+                    }
+                }
             } else {
                 System.out.println("On " + datesList.get(i) + " there was nobody in class.");
             }
@@ -122,6 +136,8 @@ class FaceDetectionSample {
                 if (datesList.get(i).equals(searchDate)) {
                     found = true;
                     foundIndex = i;
+                }else{
+                    found = false;
                 }
             }
             //if the value has been found, print the found message
@@ -132,7 +148,6 @@ class FaceDetectionSample {
                 //if the date can't be found display an error message
                 System.out.println("Sorry, that date couldn't be found.");
             }
-
 
             //if the user chooses not to search for a date complete the attendance.
         } else if (answer.toUpperCase().equals("NO")) {
